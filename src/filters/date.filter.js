@@ -1,5 +1,4 @@
 export default function dateFilter(value, format = 'date') {
-  console.log(value, format);
   var options = {};
 
   if (format.includes('date')) {
