@@ -8,7 +8,7 @@
     <section>
       <div>
         <p>
-          <strong>Девушка:</strong>
+          <strong>Дом:</strong>
           12 122 из 14 0000
         </p>
         <div class="progress" >
