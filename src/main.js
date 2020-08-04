@@ -4,22 +4,26 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import dateFilter from '@/filters/date.filter'
+import currencyFilter from '@/filters/currency.filter'
 import messagePlugin from '@/utils/message.plugin'
+import Loader from '@/components/app/Loader'
 import 'materialize-css/dist/js/materialize.min'
 
 Vue.config.productionTip = false
 
 Vue.filter('date', dateFilter);
+Vue.filter('currency', currencyFilter);
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
+Vue.component('Loader', Loader);
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
 firebase.initializeApp({
-  apiKey: "AIzaSyC18ByyJfwiLPANqVallKwEYQXKVkvZXIA",
-  authDomain: "vue-crm-109ff.firebaseapp.com",
+  apiKey: process.env.VUE_APP_FIREBASE_API,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH,
   databaseURL: "https://vue-crm-109ff.firebaseio.com",
   projectId: "vue-crm-109ff",
   storageBucket: "vue-crm-109ff.appspot.com",
