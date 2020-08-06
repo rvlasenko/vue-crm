@@ -76,8 +76,6 @@
 </template>
 
 <script>
-/* eslint-disable */
-
 import {email, required, minLength} from 'vuelidate/lib/validators';
 
 export default {
@@ -119,7 +117,7 @@ export default {
         await this.$store.dispatch('register', formData);
         this.$router.push('/');
       } catch (error) {
-
+        console.log(error);
       }
     }
   },

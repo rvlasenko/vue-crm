@@ -1,10 +1,8 @@
-/* eslint-disable */
-
 import firebase from 'firebase/app';
 
 export default {
   actions: {
-    async login({dispatch, commit}, {email, password}) {
+    async login({commit}, {email, password}) {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password);
       } catch (error) {
@@ -29,7 +27,7 @@ export default {
       var user = firebase.auth().currentUser;
       return user ? user.uid : null;
     },
-    async logout({dispatch, commit}) {
+    async logout({commit}) {
       await firebase.auth().signOut();
       commit('clearInfo');
     }

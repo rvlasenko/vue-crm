@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import firebase from 'firebase/app';
 
 export default {
@@ -21,7 +19,7 @@ export default {
         var info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val();
         commit('setInfo', info);
       } catch (error) {
-        
+        console.log(error);
       }
     }
   },
