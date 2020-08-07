@@ -5,27 +5,44 @@
         <h4>Редактировать</h4>
       </div>
 
-      <form>
-        <div class="input-field" >
-          <select>
-            <option>Category</option>
+      <form @submit.prevent="submitForm">
+        <div class="input-field">
+          <select ref="select" v-model="current">
+            <option
+              v-for="cat of categories"
+              :key="cat.id"
+              :value="cat.id"
+            >{{cat.title}}</option>
           </select>
           <label>Выберите категорию</label>
         </div>
 
         <div class="input-field">
-          <input type="text" id="name">
+          <input
+              id="name"
+              type="text"
+              v-model="title"
+              :class="{invalid: $v.title.dirty && !$v.title.required}"
+          >
           <label for="name">Название</label>
-          <span class="helper-text invalid">TITLE</span>
+          <span
+            class="helper-text invalid"
+            v-if="$v.title.dirty && !$v.title.required"
+          >Введите название</span>
         </div>
 
         <div class="input-field">
           <input
               id="limit"
               type="number"
+              v-model.number="limit"
+              :class="{invalid: $v.limit.dirty && !$v.limit.minValue}"
           >
           <label for="limit">Лимит</label>
-          <span class="helper-text invalid">LIMIT</span>
+          <span
+            class="helper-text invalid"
+            v-if="$v.limit.dirty && !$v.limit.minValue"
+          >Минимальное значение {{$v.limit.$params.minValue.min}}</span>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
@@ -36,3 +53,70 @@
     </div>
   </div>
 </template>
+
+<script>
+import {required, minValue} from 'vuelidate/lib/validators';
+import M from 'materialize-css';
+
+export default {
+  props: {
+    categories: {
+      type: Array,
+      required: true
+    }
+  },
+  data: () => ({
+    select: null,
+    title: '',
+    limit: 1,
+    current: null,
+  }),
+  validations: {
+    title: {required},
+    limit: {minValue: minValue(1)},
+  },
+  methods: {
+    async submitForm() {
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        return;
+      }
+
+      try {
+        var data = {
+          id: this.current,
+          title: this.title,
+          limit: this.limit,
+        };
+        await this.$store.dispatch('updateCategory', data);
+        this.$message('Категория обновлена');
+        this.$emit('updated', data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  watch: {
+    current(catId) {
+      var {title, limit} = this.categories.find(c => c.id === catId);
+      this.title = title;
+      this.limit = limit;
+    }
+  },
+  created() {
+    var {id, title, limit} = this.categories[0];
+    this.current = id;
+    this.title = title;
+    this.limit = limit;
+  },
+  mounted() {
+    this.select = M.FormSelect.init(this.$refs.select);
+    M.updateTextFields();
+  },
+  destroyed() {
+    if (this.select && this.select.destroy) {
+      this.select.destroy();
+    }
+  },
+}
+</script>

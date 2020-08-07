@@ -14,8 +14,8 @@ export default {
     }
   },
   watch: {
-    error(fbError) {
-      this.$error(messages[fbError.code] || 'Что-то пошло не так');
+    error(firebaseErr) {
+      this.$error(messages[firebaseErr.code] || 'Что-то пошло не так');
     }
   }
 }

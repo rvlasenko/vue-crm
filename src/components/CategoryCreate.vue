@@ -45,7 +45,7 @@
 
 <script>
 import {required, minValue} from 'vuelidate/lib/validators';
-import M from 'materialize-css'
+import M from 'materialize-css';
 
 export default {
   data: () => ({
