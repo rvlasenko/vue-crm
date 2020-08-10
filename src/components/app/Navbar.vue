@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import M from 'materialize-css';
-
 export default {
   data: () => ({
     date: new Date(),
