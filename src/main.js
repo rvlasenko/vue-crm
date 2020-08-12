@@ -12,11 +12,14 @@ import 'materialize-css/dist/js/materialize.min'
 
 Vue.config.productionTip = false
 
+Vue.use(Vuelidate);
+Vue.use(messagePlugin);
+
 Vue.filter('date', dateFilter);
 Vue.filter('currency', currencyFilter);
-Vue.use(Vuelidate);
+
 Vue.directive('tooltip', tooltipDirective);
-Vue.use(messagePlugin);
+
 Vue.component('Loader', Loader);
 
 import firebase from 'firebase/app';
@@ -38,8 +41,8 @@ var app;
 firebase.auth().onAuthStateChanged(() => {
   if (!app) {
     app = new Vue({
-      router,
-      store,
+      router: router,
+      store: store,
       render: h => h(App)
     }).$mount('#app');
   }

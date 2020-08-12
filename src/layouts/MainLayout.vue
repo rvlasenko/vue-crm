@@ -25,6 +25,7 @@
 <script>
 import Navbar from '@/components/app/Navbar.vue';
 import Sidebar from '@/components/app/Sidebar.vue';
+import messages from '@/utils/messages';
 
 export default {
   name: 'main-layout',
@@ -42,5 +43,15 @@ export default {
 
     this.loading = false;
   },
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    }
+  },
+  watch: {
+    error(firebaseErr) {
+      this.$error(messages[firebaseErr.code] || 'Что-то пошло не так');
+    }
+  }
 }
 </script>
