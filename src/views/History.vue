@@ -14,38 +14,48 @@
 
     <section v-else>
       <HistoryTable
-        :records="records"
+        :records="items"
+      />
+
+      <Paginate
+        :page-count="pageCount"
+        :click-handler="pageChangeHandler"
+        :prev-text="'Назад'"
+        :next-text="'Вперед'"
+        :container-class="'pagination'"
+        :page-class="'waves-effect'"
+        v-model="page"
       />
     </section>
   </div>
 </template>
 
 <script>
+import paginationMixin from '@/mixins/pagination.mixin';
 import HistoryTable from '@/components/HistoryTable';
 
 export default {
   name: 'history',
+  mixins: [paginationMixin],
   components: {
     HistoryTable
   },
   data: () => ({
     loading: true,
     records: [],
-    categories: [],
   }),
   async mounted() {
-    // this.records = await this.$store.dispatch('fetchRecords');
-    const records = await this.$store.dispatch('fetchRecords');
-
-    this.categories = await this.$store.dispatch('fetchCategories');
-    this.records = records.map(record => {
+    this.records = await this.$store.dispatch('fetchRecords');
+    const categories = await this.$store.dispatch('fetchCategories');
+    
+    this.setupPagination(this.records.map(record => {
       return {
         ...record,
-        categoryName: this.categories.find(cat => cat.id === record.categoryId).title,
+        categoryName: categories.find(cat => cat.id === record.categoryId).title,
         typeClass: record.type === 'income' ? 'green' : 'red',
         typeText: record.type === 'income' ? 'Доход' : 'Расход',
       };
-    }).reverse();
+    }).reverse());
     this.loading = false;
   }
 }
