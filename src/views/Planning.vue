@@ -18,7 +18,7 @@
         <div class="progress" v-tooltip="cat.tooltip">
           <div
               class="determinate"
-              :class="[cat.progressColor]"
+              :class="cat.progressColor"
               :style="{width: cat.progressPercent + '%'}"
           ></div>
         </div>
