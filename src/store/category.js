@@ -6,18 +6,22 @@ export default {
       try {
         var uid = await dispatch('getUid');
         var categories = (await firebase.database().ref(`/users/${uid}/categories`).once('value')).val() || {};
-        // var transformed = [];
-        // Object.keys(categories).forEach(key => {
-        //   transformed.push({
-        //     title: categories[key].title,
-        //     limit: categories[key].limit,
-        //     id: key,
-        //   });
-        // });
-
-        // return transformed;
 
         return Object.keys(categories).map(key => ({...categories[key], id: key}));
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      }
+    },
+    async fetchCategoryById({dispatch, commit}, id) {
+      try {
+        var uid = await dispatch('getUid');
+        var category = (await firebase.database().ref(`/users/${uid}/categories`).child(id).once('value')).val() || {};
+
+        return {
+          ...category,
+          id,
+        };
       } catch (error) {
         commit('setError', error);
         throw error;
