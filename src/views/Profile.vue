@@ -36,6 +36,11 @@ import {required} from 'vuelidate/lib/validators';
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('ProfileTitle'),
+    };
+  },
   computed: {
     ...mapGetters(['info'])
   },
