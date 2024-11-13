@@ -35,13 +35,13 @@ import 'firebase/auth';
 import 'firebase/database';
 
 firebase.initializeApp({
-  apiKey: process.env.VUE_APP_FIREBASE_API,
-  authDomain: process.env.VUE_APP_FIREBASE_AUTH,
-  databaseURL: "https://vue-crm-109ff.firebaseio.com",
-  projectId: "vue-crm-109ff",
-  storageBucket: "vue-crm-109ff.appspot.com",
-  messagingSenderId: "607926178953",
-  appId: "1:607926178953:web:e30c0d900253695a10a258"
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID,
 });
 
 var app;
