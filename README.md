@@ -2,14 +2,22 @@
 
 Vue CRM is a web application designed for personal finance management. It allows users to track their income and expenses, categorize transactions, and visualize their financial history through charts. The application is built using Vue.js 2 and Firebase, providing an intuitive and responsive user interface.
 
+<p align="center">
+    <img src="./public/screenshot.png" alt="Vue CRM - Home Accounting">
+</p>
+
+## Demo
+Check out a [live demo](https://google.com).
+
 ## Features
 
-- **User Authentication**: Users can register and log in to access their personal accounts.
-- **Personal Profile**: Each user has a profile to manage their financial data securely.
-- **Dashboard**: Displays current currency balances (RUB, USD, EUR) and available funds.
-- **Categories**: Users can create and manage categories to organize their income and expenses.
-- **Transaction Records**: Users can add records for both income and expenses, assigning them to the appropriate categories.
-- **Charts**: Visual representation of financial history, allowing users to analyze their spending and income trends over time.
+- 👥 User Authentication: Users can register and log in to access their personal accounts.
+- 👤 Personal Profile: Each user has a profile to manage their financial data securely.
+- 📊 Dashboard: Displays current currency balances (RUB, USD, EUR) and available funds.
+- 🇺🇳 Internationalized: Built-in internationalization support.
+- 📚 Categories: Users can create and manage categories to organize their income and expenses.
+- 🗂️ Transaction Records: Users can add records for both income and expenses, assigning them to the appropriate categories.
+- 📈 Charts: Visual representation of financial history, allowing users to analyze their spending and income trends over time.
 
 ## Installation
 
